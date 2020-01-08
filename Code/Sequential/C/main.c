@@ -6,7 +6,7 @@
 #include <crypt.h>
 
 #define WORD_SIZE 8 // word size
-#define PASSWORD "GoCh1efs" // target password
+#define PASSWORD "6Melissa" // target password
 #define SALT "PC" // 2 characters salt is needed to use DES in crypt() func
 #define DICTIONARY "dict_1500000.txt"
 

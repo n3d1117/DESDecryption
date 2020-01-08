@@ -10,13 +10,13 @@ using namespace std;
 
 int main(int argc, char** argv) {
 
-    string password = "GoCh1efs";
+    string password = "6Melissa";
     string salt = "PC"; // 2 characters salt is needed to use DES in r_crypt() func
 
     cout << "[*] TARGET: " << password << endl;
     cout << "[*] SALT: " << salt << endl;
 
-    vector<int> nThreads = {2, 3, 4, 5, 6, 7, 8, 12, 16, 20, 24, 28, 32, 40, 50, 100, 200, 300};
+    vector<int> nThreads = {2, 4, 8, 16, 32, 64, 128, 256, 512, 1024, 2048, 4096};
 
     try {
         Decrypter d(DICTIONARY, password, salt);

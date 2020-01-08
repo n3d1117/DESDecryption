@@ -48,9 +48,9 @@ __global__ void kernel(uint64_t *fullDictionary, uint64_t *found) {
 	}
 }
 
-int main(void) {
-	
-	const char *password = "GoCh1efs"; // target password
+void execute(int blockSize) {
+
+	const char *password = "6Melissa"; // target password
 	const char *salt = "PC";
 
 	printf("[*] Target password: %s\n", password);
@@ -92,9 +92,13 @@ int main(void) {
 	// Start clock
 	clock_t start = clock();
 
+	// Organize grid
+	dim3 blockDim(blockSize);
+	dim3 gridDim(DICTIONARY_SIZE/blockDim.x + 1);
+
 	// Execute kernel
 	printf("[*] Launching kernel...\n");
-	kernel<<<DICTIONARY_SIZE/512 + 1,512>>>(device_dictionary, device_password_found);
+	kernel<<<gridDim, blockDim>>>(device_dictionary, device_password_found);
 	cudaDeviceSynchronize();
 
 	// Copy results from device memory to host
@@ -124,6 +128,15 @@ int main(void) {
 	// Free host memory
 	free(host_dictionary);
 	free(password_found);
+}
 
-	return 0;
+int main(void) {
+	int blocks[7];
+	for (int i=3, j=0; i < 10; i++, j++) {
+		blocks[j] = pow(2,i);
+	}
+	for (int i=0; i<sizeof(blocks)/sizeof(blocks[0]); i++) {
+		printf("\n\n===> Executing with %d blocks and %d threads per block\n\n", blocks[i], blocks[i]);
+		execute(blocks[i]);
+	}
 }

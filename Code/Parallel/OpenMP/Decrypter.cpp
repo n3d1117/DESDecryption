@@ -42,7 +42,7 @@ void Decrypter::decrypt(int threads) {
 
         //cout << "[i] Thread num: " << omp_get_thread_num() << endl;
 
-#pragma omp for firstprivate(fullDictionary)
+#pragma omp for
         for (int i = 0; i < fullDictionary.size(); i++) {
             if (found) continue;
 
