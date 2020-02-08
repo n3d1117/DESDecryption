@@ -1,3 +1,0 @@
-## OpenMP version
-
-todo

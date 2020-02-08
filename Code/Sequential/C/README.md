@@ -1,3 +1,0 @@
-## C sequential version
-
-todo

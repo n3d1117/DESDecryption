@@ -99,7 +99,7 @@ while ((getline(&current, &len, dict)) != -1) {
 Data l'assenza di \textit{crypt} su piattaforma CUDA, è stata utilizzata una libreria esterna open-source per la cifratura DES: \textit{des-cuda} \cite{DES-CUDA}.
 Questa espone un metodo \textit{full\_des\_encode\_block} che prende in input due valori di tipo \textit{uint64\_t} (interi a 64 bit, parola da cifrare e \textit{salt}) e restituisce a sua volta un \textit{uint64\_t} corrispondente alla cifratura DES della parola con il \textit{salt} fornito. Per adeguarsi, quindi, nella fase di preprocessamento tutte le parole del dizionario sono state convertite in interi a 64 bit. 
 
-Dopo aver allocato e copiato la memoria necessaria da \textit{host} a \textit{device}, si effettua il lancio del \textit{kernel}, porzione di codice che viene eseguita in parallelo dai vari thread della GPU, con numero di \textit{blocchi} variabile e numero di \textit{grid} dipendente dalla dimensione del dizionario.
+Dopo aver allocato e copiato la memoria necessaria da \textit{host} a \textit{device}, si effettua il lancio del \textit{kernel}, porzione di codice che viene eseguita in parallelo dai vari thread della GPU, con dimensione dei \textit{blocchi} variabile e dimensione del \textit{grid} dipendente dalla lunghezza del dizionario.
 \newline
 
 \begin{lstlisting}[basicstyle=\scriptsize, language=C, frame=single, caption={Esempio di lancio del kernel in CUDA},captionpos=b]
